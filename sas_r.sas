@@ -319,12 +319,12 @@ title1 'sas-r.sas Data Definition Table';
 footnote1 "RECOMMENDATION: All variables should have variable 'labels' and 'formats'";
 proc report data=db01_DDT_FINAL nowd split="~~" ls=160 headskip headline missing;
     column MEMNAME NAME LABEL TYP FORMAT DECODE;
-    define MEMNAME / width=10 flow order;
-    define NAME / width=10;
+    define MEMNAME / width=16 flow order;
+    define NAME / width=20 flow;
     define TYP / width=5;
     define LABEL / width=40 flow;
     define FORMAT / width=12 flow;
-    define DECODE / width=60 flow;
+    define DECODE / width=50 flow;
 
     break after MEMNAME / skip;
 run;
