@@ -2,14 +2,14 @@
 sas-r
 =====
 
-Import of SAS files into R with associated **formats**. Generation of a Data Definition Table (DDT) in SAS.
+Import of SAS files into R with associated **user-defined formats**. Generation of a Data Definition Table (DDT) in SAS.
 
 Data checks regarding values in data base vs. format definitions/value labels.
 
 Overview
 --------
 
-The goal of this SAS program is to import **SAS .7bdat files** into R with associated **formats** by generating automatically an executable *.R script file* that generates R data frames - step by step - with R *factors*, *levels* and *labels*.
+The goal of this SAS program is to import **SAS .7bdat files** into R with associated **user-defined formats** by generating automatically an executable *.R script file* that generates R data frames - step by step - with R *factors*, *levels* and *labels*.
 
 For importing of .sas7bdat files **two steps** must be followed:
 
@@ -188,6 +188,6 @@ Check, if changes are necessary. Such categorization can be intended e.g. for ta
 Conclusion
 ----------
 
-This SAS program allows a quick transformation of many *SAS .7bdat files* to *R data frames* with associated SAS formats (equivalent to R *factors* with *levels*) The program provides also a *Data Definition Table* to see the variable properties and the decodes of the formats. Finally, a 2nd SAS program can be run to check if there are values in the database w/o corresponding value labels/format definitions (and vice versa).
+This SAS program allows a quick transformation of many *SAS .7bdat files* to *R data frames* with associated user-defined SAS formats (equivalent to R *factors* with *levels*) The program provides also a *Data Definition Table* to see the variable properties and the decodes of the formats. Finally, a 2nd SAS program can be run to check if there are values in the database w/o corresponding value labels/format definitions (and vice versa).
 
 Beside the **R base** functions the functions **haven::read\_sas** and **Hmisc::label** will be used for generating *R data frames*.
