@@ -122,6 +122,29 @@ After running this *.R script file* in R or RStudio -&gt; look for warnings (the
 
 **Note:** Beside the **R base** functions (**factor**, **levels**) only the functions **haven::read\_sas**, and **Hmisc::label** will be used for generating *R data frames*.
 
+### Haven catalog_file Option - Alternative Method
+
+A very much shorter - but also *substantially different* - method is to use ```haven catalog_file``` option to import SAS files with user-defined formats (SAS catalog file) and to use  ```as_factor()``` to generate value labels/factors.
+
+In this case, value labels will *not* be assigned to **factor**/**levels**, but 1st translated into a ```labelled ``` class and then (optionally) coerced to **factor**/**levels**. 
+
+Pls. note, that different results may be obtained (e.g., in the case of character formats with missing observations in the database).
+
+``` r
+library(haven)
+### Read DM.sas7bdat file with SAS formats, i.e. SAS format catalog
+DM <- read_sas("DM.sas7bdat", catalog_file = "formats.sas7bcat")
+
+### Apply as_factor() to data frame / coerce to factors
+DM <- as_factor(DM)
+
+### Example table;
+table(DM$SEX)
+
+### Display structure
+str(DM$SEX)
+```
+
 Tests
 -----
 
@@ -144,7 +167,7 @@ proc format;
               "Y"="Yes"
               "U"="Unknown";
               
-    valee $YES "Y"="Yes";
+    value $YES "Y"="Yes";
               
     value $SEX "F"="Female"
                "M"="Male";
@@ -188,6 +211,6 @@ Check, if changes are necessary. Such categorization can be intended e.g. for ta
 Conclusion
 ----------
 
-This SAS program allows a quick transformation of many *SAS .7bdat files* to *R data frames* with associated user-defined SAS formats (equivalent to R *factors* with *levels*) The program provides also a *Data Definition Table* to see the variable properties and the decodes of the formats. Finally, a 2nd SAS program can be run to check if there are values in the database w/o corresponding value labels/format definitions (and vice versa).
+This SAS program allows a quick transformation of many *SAS .7bdat files* to *R data frames* with associated user-defined SAS formats (assigned to R **factors** with **levels** - in contrast to the ```haven read_sas(catalog_file)``` method - that translates value labels into a ```labelled``` class - and that can produce  different results, too). The program provides also a *Data Definition Table* to see the variable properties and the decodes of the formats. Finally, a 2nd SAS program can be run to check if there are values in the database w/o corresponding value labels/format definitions (and vice versa).
 
 Beside the **R base** functions the functions **haven::read\_sas** and **Hmisc::label** will be used for generating *R data frames*.
